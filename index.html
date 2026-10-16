@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>دار خادم القرآن الكريم | أخميم</title>
+<meta name="description" content="دار خادم القرآن الكريم بأخميم: تحفيظ القرآن الكريم وتعليم العلوم الشرعية. حلقات للأطفال، ومقرأة إلكترونية، وإقراء خاص للكبيرات، ودورات لإعداد المعلمات.">
+<link rel="icon" href="logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== الألوان: مأخوذة من شعار الدار ===== */
+:root{
+  color-scheme: light;
+  --bg:#F8F6EF;
+  --surface:#FFFFFF;
+  --tint:#EEF3EC;
+  --green:#17553A;
+  --green-deep:#0F3F2A;
+  --gold:#A87C24;
+  --gold-soft:#EADDB8;
+  --ink:#1C2A22;
+  --muted:#5A6A61;
+  --line:#E2DCCB;
+  --on-green:#FFFFFF;
+  --head:'Amiri', 'Traditional Arabic', 'Times New Roman', serif;
+  --body:'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, Arial, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg:#0F1A15; --surface:#16241D; --tint:#1B2C23;
+    --green:#62B68B; --green-deep:#8ACBA8; --gold:#D9AE5A; --gold-soft:#3A3322;
+    --ink:#E8EFEA; --muted:#A8B7AE; --line:#26382E; --on-green:#0C1712;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#0F1A15; --surface:#16241D; --tint:#1B2C23;
+  --green:#62B68B; --green-deep:#8ACBA8; --gold:#D9AE5A; --gold-soft:#3A3322;
+  --ink:#E8EFEA; --muted:#A8B7AE; --line:#26382E; --on-green:#0C1712;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:calc(80px + env(safe-area-inset-top,0px))}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.05rem;line-height:1.9;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1120px,100% - 2.5rem);margin-inline:auto}
+.measure{max-width:60ch}
+h1,h2,h3{font-family:var(--head);font-weight:700;color:var(--ink);line-height:1.45}
+h2{font-size:clamp(1.9rem,4vw,2.6rem)}
+h3{font-size:1.45rem}
+p{color:var(--muted)}
+
+/* ===== الأزرار ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;padding:.8rem 1.6rem;border-radius:999px;font-weight:600;font-size:1rem;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-green{background:var(--green);color:var(--on-green)}
+.btn-green:hover{background:var(--green-deep)}
+.btn-ghost{border-color:var(--green);color:var(--green-deep);background:transparent}
+.btn-ghost:hover{background:var(--tint)}
+.btn-light{background:var(--surface);color:var(--green-deep)}
+
+/* ===== الزخرفة: إطار ذهبي مستوحى من الشعار ===== */
+.ornament{display:flex;align-items:center;gap:.8rem;color:var(--gold);margin:1rem 0 1.4rem}
+.ornament::before,.ornament::after{content:"";height:1.5px;background:currentColor;flex:1;max-width:90px;opacity:.8}
+.ornament svg{width:22px;height:22px}
+.center{text-align:center}
+.center .ornament{justify-content:center}
+.center .measure{margin-inline:auto}
+
+/* ===== الهيدر ===== */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:76px}
+.brand{display:flex;align-items:center;gap:.75rem;text-decoration:none}
+.brand img{width:52px;height:52px}
+.brand b{font-family:var(--head);font-size:1.45rem;color:var(--green-deep);line-height:1.2;display:block}
+.brand small{color:var(--muted);font-size:.8rem}
+.menu{display:flex;gap:.3rem;list-style:none;align-items:center}
+.menu a{display:block;padding:.45rem .85rem;border-radius:999px;text-decoration:none;color:var(--muted);font-weight:500}
+.menu a:hover{color:var(--ink)}
+.menu a[aria-current="page"]{background:var(--tint);color:var(--green-deep)}
+.menu-toggle{display:none;background:none;border:0;color:var(--green-deep);padding:.4rem;cursor:pointer}
+.menu-toggle svg{width:28px;height:28px}
+
+/* ===== الصفحات ===== */
+.js .page{display:none}
+.js .page.active{display:block}
+section{padding:4.5rem 0}
+.band{background:var(--surface);border-block:1px solid var(--line)}
+
+/* الواجهة */
+.hero{padding:4rem 0 4.5rem;background:
+  radial-gradient(circle at 15% 20%,var(--tint) 0,transparent 45%),
+  radial-gradient(circle at 85% 80%,var(--gold-soft) 0,transparent 40%)}
+.hero-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:3rem;align-items:center}
+.hero h1{font-size:clamp(2.4rem,5.4vw,3.8rem);color:var(--green-deep)}
+.hero .slogan{font-family:var(--head);font-size:1.5rem;color:var(--gold);margin-top:.4rem}
+.hero p.lead{margin-top:1.1rem;font-size:1.15rem}
+.actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
+.hero-logo{justify-self:center;width:min(360px,80vw);filter:drop-shadow(0 18px 30px rgba(15,63,42,.18))}
+@media (prefers-reduced-motion:no-preference){
+  .hero-logo{animation:arrive 1s ease both}
+  @keyframes arrive{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+}
+
+/* مزايا */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
+.pillar .ic{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:var(--tint);color:var(--green);margin-bottom:1rem;border:1.5px solid var(--gold)}
+.pillar .ic svg{width:26px;height:26px}
+.pillar h3{font-size:1.35rem;margin-bottom:.3rem}
+
+/* الآية */
+.ayah{padding:4rem 0;background:var(--green-deep);color:var(--on-green);text-align:center}
+.ayah blockquote{font-family:var(--head);font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.9;color:var(--on-green)}
+.ayah cite{display:block;font-style:normal;margin-top:.5rem;opacity:.85;font-size:.95rem}
+
+
+/* شارات التميز */
+.badge-lead{display:grid;justify-items:center;text-align:center;gap:1rem;margin-bottom:2.5rem}
+.seal{display:inline-block;font-family:var(--head);font-weight:700;font-size:1.3rem;color:var(--green-deep);background:var(--surface);border:1.5px solid var(--gold);border-radius:999px;padding:.35rem 1.4rem;box-shadow:0 0 0 4px var(--tint)}
+.badge-lead .seal{font-size:1.7rem;padding:.5rem 2rem}
+.badges{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;text-align:center}
+.badges p{margin-top:.75rem;font-size:1rem}
+@media (max-width:900px){.badges{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.badges{grid-template-columns:1fr}}
+
+/* البرامج */
+.programs{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.program{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1.75rem;display:flex;flex-direction:column;gap:.7rem}
+.program.wide{grid-column:1/-1;background:var(--tint)}
+.program .who{display:inline-block;align-self:flex-start;background:var(--gold-soft);color:var(--ink);font-size:.85rem;font-weight:500;padding:.2rem .8rem;border-radius:12px}
+.program ul{padding-inline-start:1.2rem;color:var(--muted)}
+.program .btn{align-self:flex-start;margin-top:auto}
+.soon{color:var(--gold);font-weight:600;font-size:.95rem}
+
+/* خطوات الحلقة (تسلسل فعلي) */
+.steps{list-style:none;counter-reset:s;display:grid;grid-template-columns:repeat(4,1fr);gap:1.75rem}
+.steps li{counter-increment:s;border-top:2px solid var(--gold);padding-top:1rem}
+.steps li::before{content:counter(s, arabic-indic);font-family:var(--head);font-size:2.2rem;color:var(--green);display:block;line-height:1.2}
+.steps h3{font-size:1.25rem}
+
+/* من نحن */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.values{display:grid;gap:1.1rem;list-style:none}
+.values li{padding-inline-start:1.1rem;border-inline-start:3px solid var(--gold)}
+.values b{display:block;color:var(--ink)}
+
+/* أماكن الصور */
+.ph{position:relative;aspect-ratio:4/3;border-radius:18px;overflow:hidden;border:1.5px dashed var(--gold);background:
+  repeating-linear-gradient(45deg,var(--tint) 0 14px,transparent 14px 28px),var(--surface);display:grid;place-items:center;text-align:center;color:var(--muted);font-size:.95rem;padding:1rem}
+.ph svg{width:36px;height:36px;color:var(--gold);margin:0 auto .4rem}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.gallery figcaption{margin-top:.5rem;font-size:.95rem;color:var(--muted);text-align:center}
+
+
+/* لوحات الشرف */
+.honor{columns:3 260px;column-gap:1rem}
+.honor figure{break-inside:avoid;margin-bottom:1rem;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:.6rem}
+.honor img{width:100%;height:auto;border-radius:10px}
+.honor figcaption,.gallery figcaption{margin-top:.5rem;font-size:.95rem;color:var(--muted);text-align:center}
+.poster{display:block;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:.6rem}
+.poster img{border-radius:12px;width:100%;height:auto}
+.poster span{display:block;text-align:center;margin-top:.5rem;color:var(--green-deep);font-weight:600}
+
+
+/* الألبوم المتحرك */
+.carousel{position:relative;max-width:520px;margin-inline:auto;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:.8rem}
+.car-track{position:relative;aspect-ratio:4/5;border-radius:14px;overflow:hidden;background:var(--tint)}
+.carousel.small .car-track{aspect-ratio:1/1}
+.car-track figure{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;margin:0}
+.car-track figure.on{opacity:1}
+.car-track img{width:100%;height:100%;object-fit:contain}
+.car-btn{position:absolute;top:calc(50% - 1.5rem);width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--green-deep);display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.car-btn svg{width:22px;height:22px}
+.car-prev{inset-inline-start:1.2rem}.car-next{inset-inline-end:1.2rem}
+.car-cap{text-align:center;margin-top:.6rem;color:var(--ink);font-weight:600;min-height:1.6em}
+.car-dots{display:flex;justify-content:center;gap:.4rem;margin-top:.3rem;flex-wrap:wrap}
+.car-dots button{width:9px;height:9px;border-radius:50%;border:0;background:var(--line);cursor:pointer;padding:0}
+.car-dots button[aria-current="true"]{background:var(--gold);width:22px;border-radius:999px}
+.slogan-sm{font-family:var(--head);color:var(--gold);font-size:1.3rem;margin-bottom:.6rem}
+
+/* المقالات */
+.articles{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.card-a{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none}
+.card-a img{aspect-ratio:16/10;object-fit:cover;width:100%}
+.card-a .in{padding:1.2rem;display:flex;flex-direction:column;gap:.4rem;flex:1}
+.card-a h3{font-size:1.3rem}
+.card-a time,.post time{color:var(--gold);font-size:.9rem;font-weight:600}
+.card-a .more{margin-top:auto;color:var(--green-deep);font-weight:600}
+.post{max-width:760px;margin-inline:auto}
+.post h1{font-size:clamp(2rem,4.5vw,2.8rem);color:var(--green-deep)}
+.post .cover{border-radius:18px;margin:1.5rem 0;width:100%}
+.post .body{color:var(--ink)}
+.post .body p{color:var(--ink);margin-bottom:1rem}
+.post .body h2,.post .body h3{margin:1.5rem 0 .5rem}
+.post .body ul,.post .body ol{padding-inline-start:1.4rem;margin-bottom:1rem}
+.post .body img{border-radius:12px;margin:1rem 0}
+.post .body blockquote{border-inline-start:4px solid var(--gold);padding-inline-start:1rem;color:var(--muted);margin:1rem 0}
+.empty{color:var(--muted)}
+@media (max-width:900px){.articles{grid-template-columns:1fr}}
+
+/* الأسئلة الشائعة */
+.faq{max-width:780px;margin-inline:auto;display:grid;gap:.75rem}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1rem 1.25rem}
+.faq summary{cursor:pointer;font-weight:600;color:var(--ink);list-style:none;display:flex;justify-content:space-between;gap:1rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--gold);font-size:1.4rem;line-height:1}
+.faq details[open] summary::after{content:"−"}
+.faq details p{margin-top:.6rem}
+
+/* الدورة */
+.course-card{background:var(--green-deep);color:var(--on-green);border-radius:22px;padding:2.25rem;display:grid;gap:1rem}
+.course-card h3{color:var(--on-green);font-size:1.7rem}
+.course-card p,.course-card li{color:var(--on-green);opacity:.92}
+.course-card ul{padding-inline-start:1.2rem}
+
+/* الكفالة */
+.kafala{text-align:center;background:var(--tint)}
+
+/* التواصل */
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.contact-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1.6rem;display:flex;flex-direction:column;gap:.5rem}
+.contact-card .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:var(--tint);color:var(--green)}
+.contact-card .ic svg{width:24px;height:24px}
+.contact-card a{color:var(--green-deep);font-weight:600;text-decoration:none;direction:ltr;text-align:right}
+.map{margin-top:2rem;aspect-ratio:16/7}
+
+/* الأيقونات الاجتماعية */
+.social{display:flex;flex-wrap:wrap;gap:.6rem;list-style:none}
+.social a{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:1px solid var(--line);color:var(--green-deep);transition:background .2s,color .2s}
+.social a:hover{background:var(--green);color:var(--on-green)}
+.social svg{width:20px;height:20px}
+.social a[href="#"]{display:none} /* تظهر الأيقونة تلقائيًّا عند وضع رابطها */
+
+/* الفوتر */
+footer{background:var(--green-deep);color:var(--on-green);padding:3rem 0 1.5rem}
+footer p,footer a{color:var(--on-green)}
+footer p{opacity:.85}
+.foot{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:2rem}
+.foot h4{font-family:var(--head);font-size:1.3rem;margin-bottom:.6rem}
+.foot ul{list-style:none;display:grid;gap:.3rem}
+.foot ul a{text-decoration:none;opacity:.85}
+.foot ul a:hover{opacity:1}
+.foot .brand b,.foot .brand small{color:var(--on-green)}
+footer .social a{background:transparent;border-color:rgba(255,255,255,.35);color:var(--on-green)}
+.copy{margin-top:2rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.2);text-align:center;font-size:.9rem}
+
+/* زر واتساب العائم */
+.wa-float{position:fixed;inset-inline-start:1.25rem;bottom:calc(1.25rem + env(safe-area-inset-bottom,0px));z-index:60;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#1FA855;color:#fff;box-shadow:0 8px 22px rgba(0,0,0,.2)}
+.wa-float svg{width:30px;height:30px}
+
+/* ===== الجوال ===== */
+@media (max-width:900px){
+  .menu-toggle{display:block}
+  .menu{display:none;position:absolute;top:100%;inset-inline:0;flex-direction:column;align-items:stretch;background:var(--bg);padding:.75rem 1.25rem 1.25rem;border-bottom:1px solid var(--line)}
+  .menu.open{display:flex}
+  .menu a{padding:.7rem 1rem}
+  .hero-grid,.split{grid-template-columns:1fr;gap:2rem}
+  .hero-logo{order:-1;width:min(240px,64vw)}
+  .pillars,.contact-grid{grid-template-columns:1fr}
+  .programs{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .gallery{grid-template-columns:1fr 1fr}
+  .foot{grid-template-columns:1fr}
+  section{padding:3.25rem 0}
+}
+@media (max-width:480px){
+  .steps,.gallery{grid-template-columns:1fr}
+  .brand b{font-size:1.2rem}
+  .brand img{width:44px;height:44px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== أيقونات قابلة لإعادة الاستخدام ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.5 1.6-1.5h1.6V4.4a22 22 0 0 0-2.4-.1c-2.4 0-4 1.4-4 4.1v2.4H7.6V14h2.7v8Z"/></symbol>
+  <symbol id="i-tg" viewBox="0 0 24 24"><path fill="currentColor" d="M21.4 4.2 2.9 11.3c-1.3.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.1.9.8.9.5 0 .7-.2 1-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.8c.3-1.3-.5-1.9-1.5-1.4ZM8.9 14l9.3-5.9c.5-.3.8-.1.4.2l-7.8 7.1-.3 3.3Z"/></symbol>
+  <symbol id="i-yt" viewBox="0 0 24 24"><path fill="currentColor" d="M22 8.2a3 3 0 0 0-2.1-2.1C18 5.6 12 5.6 12 5.6s-6 0-7.9.5A3 3 0 0 0 2 8.2 31 31 0 0 0 1.6 12 31 31 0 0 0 2 15.8a3 3 0 0 0 2.1 2.1c1.9.5 7.9.5 7.9.5s6 0 7.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .4-3.8 31 31 0 0 0-.4-3.8ZM10 15.2V8.8l5.2 3.2Z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path fill="currentColor" d="M17.8 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.3L2 3h6.4l4.4 5.8Zm-1.1 16.2h1.7L7.4 4.7H5.6Z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><path fill="currentColor" d="M12 7.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4Zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm6-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0ZM21.9 8c0-1.6-.4-3-1.6-4.2S17.7 2.1 16 2.1C14.4 2 9.6 2 8 2.1c-1.6 0-3 .4-4.2 1.6S2.2 6.4 2.1 8C2 9.6 2 14.4 2.1 16c0 1.6.4 3 1.6 4.2s2.6 1.5 4.2 1.6c1.6.1 6.5.1 8.1 0 1.6 0 3-.4 4.2-1.6s1.5-2.6 1.6-4.2c.1-1.6.1-6.4 0-8Zm-2 9.8a3.3 3.3 0 0 1-1.9 1.9c-1.3.5-4.3.4-5.7.4s-4.4.1-5.7-.4A3.3 3.3 0 0 1 4.8 18c-.5-1.3-.4-4.3-.4-5.7s-.1-4.4.4-5.7A3.3 3.3 0 0 1 6.7 4.7c1.3-.5 4.3-.4 5.7-.4s4.4-.1 5.7.4a3.3 3.3 0 0 1 1.9 1.9c.5 1.3.4 4.3.4 5.7s.1 4.4-.4 5.7Z"/></symbol>
+  <symbol id="i-tt" viewBox="0 0 24 24"><path fill="currentColor" d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.2v12.4a2.6 2.6 0 1 1-1.8-2.5V9.7a5.8 5.8 0 1 0 5 5.7V9.1a7.4 7.4 0 0 0 4.3 1.4V7.3a4.3 4.3 0 0 1-3.2-1.5Z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="i-img" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="10" r="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m4 18 5-5 4 4 3-3 4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2c.6 3.8 2.2 5.4 6 6-3.8.6-5.4 2.2-6 6-.6-3.8-2.2-5.4-6-6 3.8-.6 5.4-2.2 6-6Zm0 14c.3 1.9 1.1 2.7 3 3-1.9.3-2.7 1.1-3 3-.3-1.9-1.1-2.7-3-3 1.9-.3 2.7-1.1 3-3Z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M12 6.5C10.2 5 7.5 4.5 4 4.8v13c3.5-.3 6.2.2 8 1.7 1.8-1.5 4.5-2 8-1.7v-13c-3.5-.3-6.2.2-8 1.7Zm0 0v13"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M12 3 4.5 6v5.5c0 4.5 3.2 8.2 7.5 9.5 4.3-1.3 7.5-5 7.5-9.5V6Z"/><path fill="none" stroke="currentColor" stroke-width="1.7" d="m8.8 12 2.2 2.2 4.2-4.4"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10Z"/></symbol>
+</svg>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#home">
+      <img src="logo.webp" alt="شعار دار خادم القرآن الكريم" width="52" height="52">
+      <span><b>دار خادم القرآن</b><small>أخميم، سوهاج</small></span>
+    </a>
+    <button class="menu-toggle" aria-label="القائمة" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <ul class="menu" id="menu">
+      <li><a href="#home">الرئيسية</a></li>
+      <li><a href="#about">من نحن</a></li>
+      <li><a href="#programs">البرامج</a></li>
+      <li><a href="#course">دورة المعلمات</a></li>
+      <li><a href="#gallery">المعرض</a></li>
+      <li><a href="#articles">المقالات</a></li>
+      <li><a href="#contact">تواصل معنا</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+<!-- =========================== الرئيسية =========================== -->
+<div class="page" id="home" data-title="دار خادم القرآن الكريم | أخميم">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>دار خادم القرآن الكريم</h1>
+        <p class="slogan">بصحبة القرآن.. نصنع أجيالًا على طاعة الله</p>
+        <p class="lead measure">حلقات لتحفيظ القرآن الكريم وتعليم العلوم الشرعية للبراعم والأطفال والزهرات والنساء في أخميم، يتعلم فيها الطالب الحفظ المتقن والتلاوة الصحيحة والأدب الحسن.</p>
+        <div class="actions">
+          <a class="btn btn-green" href="https://wa.me/201060423890?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AA%D8%B3%D8%AC%D9%8A%D9%84%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AF%D8%A7%D8%B1" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>سجّل الآن على واتساب</a>
+          <a class="btn btn-ghost" href="#programs">تعرّف على البرامج</a>
+        </div>
+      </div>
+      <img class="hero-logo" src="logo.webp" alt="شعار دار خادم القرآن الكريم" width="360" height="360">
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="center">
+        <h2>لماذا دار خادم القرآن؟</h2>
+        <div class="ornament"><svg><use href="#i-star"/></svg></div>
+      </div>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="ic"><svg><use href="#i-book"/></svg></div>
+          <h3>الحفظ داخل الحلقة</h3>
+          <p>يجري معظم الحفظ والمراجعة مع المعلمة، بالتلقين والترديد والسرد الجماعي، فيخف العبء عن البيت.</p>
+        </div>
+        <div class="pillar">
+          <div class="ic"><svg><use href="#i-shield"/></svg></div>
+          <h3>الإتقان قبل الانتقال</h3>
+          <p>لا ينتقل الطالب إلى جزء جديد حتى يسرد ما حفظه كله ويثبت إتقانه، فيبقى حفظه راسخًا.</p>
+        </div>
+        <div class="pillar">
+          <div class="ic"><svg><use href="#i-heart"/></svg></div>
+          <h3>القرآن مع الأدب</h3>
+          <p>يتعلم الأطفال مع القرآن الأذكار والآداب وأحكام التجويد، في بيئة هادئة تحفظهم وتحترمهم.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="wrap">
+      <div class="center">
+        <h2>ما يميز حلقاتنا</h2>
+        <div class="ornament"><svg><use href="#i-star"/></svg></div>
+      </div>
+      <div class="badge-lead">
+        <span class="seal">الإتقان قبل الانتقال</span>
+        <p class="measure">لا نقيس التقدم بعدد الأجزاء. إذا أتم الطالب جزءًا، يتوقف عن الحفظ الجديد، ويسرد كل ما حفظه منذ التحاقه على مشرفة غير معلمته. فإن اجتاز انتقل وأخذ شهادة إتمام الجزء، وإن احتاج مراجعة عاد إلى معلمته حتى يتقنه.</p>
+      </div>
+      <ul class="badges">
+        <li><span class="seal">حلقات لا تزيد على 12 طالبًا</span><p>حتى تسمع المعلمة لكل طفل.</p></li>
+        <li><span class="seal">حلقات متقاربة المستوى</span><p>يُوضع كل طالب في الحلقة المناسبة لمستواه.</p></li>
+        <li><span class="seal">معلمات يتدربن باستمرار</span><p>على القاعدة النورانية والتجويد ومهارات إدارة الحلقة.</p></li>
+        <li><span class="seal">تقرير لولي الأمر</span><p>يصلك على واتساب بمستوى ابنك وتقدمه.</p></li>
+      </ul>
+    </div>
+  </section>
+  <div class="ayah">
+    <div class="wrap">
+      <blockquote>﴿وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ﴾</blockquote>
+      <cite>سورة القمر، الآية 17</cite>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap split">
+      <div>
+        <h2>برامج لكل الأعمار</h2>
+        <div class="ornament"><svg><use href="#i-star"/></svg></div>
+        <p class="measure">حلقات جماعية للبراعم والأطفال والزهرات، ومقرأة إلكترونية من البيت، وحلقات خاصة للنساء، ودورات لإعداد معلمات القرآن.</p>
+        <div class="actions"><a class="btn btn-green" href="#programs">اعرف البرامج</a></div>
+      </div>
+      <div class="carousel small" data-carousel aria-roledescription="ألبوم صور" aria-label="من أنشطة الدار">
+        <div class="car-track"></div>
+        <button class="car-btn car-prev" aria-label="السابق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></button>
+        <button class="car-btn car-next" aria-label="التالي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 6-6 6 6 6"/></svg></button>
+        <p class="car-cap"></p>
+        <div class="car-dots"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="kafala">
+    <div class="wrap center">
+      <h2>اكفل طالبًا</h2>
+      <div class="ornament"><svg><use href="#i-star"/></svg></div>
+      <p class="measure">في الدار أطفال يحبون القرآن وتعجز أسرهم عن الاشتراك. كفالتك تبقيهم في حلقتهم، ولك أجر كل حرف يقرؤونه.</p>
+      <div class="actions" style="justify-content:center"><a class="btn btn-green" href="https://wa.me/201060423890?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D9%83%D9%81%D8%A7%D9%84%D8%A9%20%D8%B7%D8%A7%D9%84%D8%A8" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>تواصل لكفالة طالب</a></div>
+    </div>
+  </section>
+</div>
+
+<!-- =========================== من نحن =========================== -->
+<div class="page" id="about" data-title="من نحن | دار خادم القرآن الكريم">
+  <section>
+    <div class="wrap split">
+      <div>
+        <h2>من نحن</h2>
+        <div class="ornament"><svg><use href="#i-star"/></svg></div>
+        <p class="measure">دار خادم القرآن الكريم دار لتحفيظ القرآن الكريم وتعليم العلوم الشرعية في مدينة أخميم بمحافظة سوهاج. أُسست لتكون بيتًا يتعلم فيه الأطفال كتاب الله حفظًا وتلاوة وأدبًا، على أيدي معلمات يعملن بمنهج واضح ويتدربن باستمرار.</p>
+      </div>
+      <div class="ph"><div><svg><use href="#i-img"/></svg>صورة لمقر الدار</div></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap split">
+      <div>
+        <h2>رسالتنا</h2>
+        <div class="ornament"><svg><use href="#i-star"/></svg></div>
+        <p class="slogan-sm">نغرس حبّ القرآن في القلوب، لنصنع جيلًا يرتقي بطاعة الله</p>
+        <p class="measure">أن نُخرّج جيلًا يحفظ القرآن بإتقان، ويقرؤه قراءة صحيحة، ويتخلق بأخلاقه، في بيئة تعليمية آمنة ومنظمة تشارك فيها الأسرة.</p>
+      </div>
+      <ul class="values">
+        <li><b>الإتقان</b>نقيس التقدم بثبات الحفظ لا بعدد الأجزاء.</li>
+        <li><b>الأمانة</b>نتعامل مع كل طفل على أنه أمانة عندنا، ونحفظ خصوصية الأسر.</li>
+        <li><b>التربية</b>القرآن عندنا لا ينفصل عن الأخلاق والأدب.</li>
+        <li><b>التطوير</b>معلماتنا يتدربن باستمرار على التجويد والقاعدة النورانية وإدارة الحلقة.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="center">
+        <h2>كيف تسير الحلقة</h2>
+        <div class="ornament"><svg><use href="#i-star"/></svg></div>
+        <p class="measure" style="margin-bottom:2.5rem">ترتيب ثابت في كل حلقة، حتى يعرف الطفل ما ينتظره ويشارك الجميع.</p>
+      </div>
+      <ol class="steps">
+        <li><h3>المراجعة الجماعية</h3><p>يبدأ الأطفال بسرد ما حفظوه معًا، فيثبت القديم قبل الجديد.</p></li>
+        <li><h3>التلقين والترديد</h3><p>تلقّن المعلمة المقرر الجديد ويردده الأطفال معها حتى يضبطوه.</p></li>
+        <li><h3>التسميع والتصحيح</h3><p>تسميع فردي أو في مجموعات صغيرة، مع ضبط المخارج والأحكام.</p></li>
+        <li><h3>الأذكار والآداب</h3><p>ختام الحلقة بالأذكار وتحفة الأطفال وكتاب «علّمني أبي».</p></li>
+      </ol>
+    </div>
+  </section>
+</div>
+
+<!-- =========================== البرامج =========================== -->
+<div class="page" id="programs" data-title="البرامج | دار خادم القرآن الكريم">
+  <section>
+    <div class="wrap">
+      <div class="center">
+        <h2>برامجنا</h2>
+        <div class="ornament"><svg><use href="#i-star"/></svg></div>
+        <p class="measure" style="margin-bottom:2.5rem">حلقتان في الأسبوع، واشتراك شهري ميسّر. اختر البرنامج المناسب، وتواصل معنا على واتساب لمعرفة المواعيد والرسوم وحجز مقعدك.</p>
+      </div>
+      <div class="programs">
+        <article class="program wide">
+          <span class="who">البراعم والأطفال من البنين حتى 9 سنوات، والزهرات من 4 سنوات فأكثر</span>
+          <h3>الحلقات الجماعية</h3>
+          <p>البرنامج الأساسي في الدار، بمنهج متكامل:</p>
+          <ul><li>حفظ القرآن الكريم ومراجعته</li><li>القاعدة النورانية للقراءة الصحيحة</li><li>متن تحفة الأطفال في التجويد</li><li>كتاب «علّمني أبي» والأذكار والآداب</li></ul>
+          <a class="btn btn-green" href="https://wa.me/201060423890?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D8%AD%D9%84%D9%82%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AC%D9%85%D8%A7%D8%B9%D9%8A%D8%A9" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>اسأل عن الحلقات</a>
+        </article>
+        <article class="program">
+          <span class="who">من البيت، داخل مصر وخارجها</span>
+          <h3>المقرأة الإلكترونية</h3>
+          <p>منهج الدار نفسه مع معلماتها، بالصوت والصورة، في مجموعة صغيرة أو حلقة فردية. وأول حلقة تجريبية مجانًا.</p>
+          <a class="btn btn-ghost" href="https://wa.me/201060423890?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D9%85%D9%82%D8%B1%D8%A3%D8%A9%20%D8%A7%D9%84%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A%D8%A9" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>اسأل عن المقرأة</a>
+        </article>
+        <article class="program">
+          <span class="who">للنساء</span>
+          <h3>الإقراء الخاص وحلقات النساء</h3>
+          <p>حلقة فردية أو مجموعة صغيرة للحفظ والمراجعة وتصحيح التلاوة، صباحًا في الدار أو أونلاين من البيت.</p>
+          <a class="btn btn-ghost" href="https://wa.me/201060423890?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%AD%D9%84%D9%82%D8%A7%D8%AA%20%D8%A7%D9%84%D9%86%D8%B3%D8%A7%D8%A1" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>اسألي عن الحلقات</a>
+        </article>
+        <article class="program">
+          <span class="who">لكل من يريد معرفة مستواه</span>
+          <h3>جلسة تحديد المستوى</h3>
+          <p>جلسة مع معلمة متقنة تختبر الحفظ والتلاوة، وتعطيك تقريرًا مكتوبًا بنقاط القوة وما يحتاج علاجًا، وترشح لك البرنامج المناسب.</p>
+          <a class="btn btn-ghost" href="https://wa.me/201060423890?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%AD%D8%AC%D8%B2%20%D8%AC%D9%84%D8%B3%D8%A9%20%D8%AA%D8%AD%D8%AF%D9%8A%D8%AF%20%D8%A7%D9%84%D9%85%D8%B3%D8%AA%D9%88%D9%89" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>احجز جلستك</a>
+        </article>
+        <article class="program">
+          <span class="who">للزهرات والنساء، والبراعم من البنين حتى 9 سنوات</span>
+          <h3>الكتّاب المفتوح</h3>
+          <p>حضور يومي مع معلمة مجازة، يحفظ فيه الطالب ويسرد في الوقت الذي يناسبه، ولا ينتقل من جزء حتى يتقن ما قبله.</p>
+          <p class="soon">قريبًا، والتسجيل المسبق متاح الآن</p>
+          <a class="btn btn-ghost" href="https://wa.me/201060423890?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AA%D8%B3%D8%AC%D9%8A%D9%84%20%D8%A7%D9%84%D9%85%D8%B3%D8%A8%D9%82%20%D9%81%D9%8A%20%D8%A7%D9%84%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D9%85%D9%81%D8%AA%D9%88%D8%AD" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>سجّل مسبقًا</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="center">
+        <h2>أسئلة شائعة</h2>
+        <div class="ornament"><svg><use href="#i-star"/></svg></div>
+      </div>
+      <div class="faq">
+        <details><summary>كم عدد الحلقات في الأسبوع؟</summary><p>حلقتان في الأسبوع للحلقات الجماعية والمقرأة الإلكترونية، ويُحدَّد الموعد المناسب عند التسجيل.</p></details>
+        <details><summary>هل يحتاج ابني إلى حفظ كثير في البيت؟</summary><p>يجري معظم الحفظ والمراجعة داخل الحلقة مع المعلمة. وفي البيت مراجعة خفيفة يتابعها ولي الأمر.</p></details>
+        <details><summary>كيف أعرف مستوى ابني وتقدّمه؟</summary><p>يصلك تقرير دوري على واتساب، وعند إتمام كل جزء يُختبر الطالب في سرد ما حفظه، ويحصل على شهادة إذا اجتاز.</p></details>
+        <details><summary>من المعلمات في الدار؟</summary><p>معلمات الدار كلهن من النساء، ويتدربن باستمرار على القاعدة النورانية والتجويد ومهارات إدارة الحلقة.</p></details>
+        <details><summary>كيف أعرف الرسوم والمواعيد؟</summary><p>تواصل معنا على واتساب، وتجيبك الإدارة عن الرسوم والمواعيد المتاحة لكل برنامج.</p></details>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- =========================== دورة المعلمات =========================== -->
+<div class="page" id="course" data-title="دورة القاعدة النورانية | دار خادم القرآن الكريم">
+  <section>
+    <div class="wrap split">
+      <div>
+        <h2>دورة القاعدة النورانية لإعداد المعلمات</h2>
+        <div class="ornament"><svg><use href="#i-star"/></svg></div>
+        <p class="measure">للمعلمات ومعلمات رياض الأطفال والمرحلة الابتدائية والأمهات، من أخميم وكل مراكز محافظة سوهاج. تتعلمين فيها تعليم القراءة الصحيحة من الصفر حتى قراءة المصحف، وضبط المخارج وأحكام التجويد عمليًّا، مع المدربة رحاب أمجد.</p>
+      </div>
+      <div class="course-card">
+        <h3>تبدأ الدورة فور اكتمال العدد</h3>
+        <ul>
+          <li>30 ساعة تدريبية عملية</li>
+          <li>حقيبة الدورة</li>
+          <li>اختبار وشهادة إلكترونية لمن تجتاز بنسبة 90% فأكثر (لمن هن 18 عامًا فأكثر)</li>
+        </ul>
+        <a class="btn btn-light" href="https://wa.me/201123105331?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AA%D8%B3%D8%AC%D9%8A%D9%84%20%D9%81%D9%8A%20%D8%AF%D9%88%D8%B1%D8%A9%20%D8%A7%D9%84%D9%82%D8%A7%D8%B9%D8%AF%D8%A9%20%D8%A7%D9%84%D9%86%D9%88%D8%B1%D8%A7%D9%86%D9%8A%D8%A9" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>احجزي مقعدك</a>
+      </div>
+    </div>
+  </section>
+  <section class="band">
+    <div class="wrap">
+      <div class="center">
+        <h2>بعد الدورة ستستطيعين</h2>
+        <div class="ornament"><svg><use href="#i-star"/></svg></div>
+      </div>
+      <div class="pillars">
+        <div class="pillar"><div class="ic"><svg><use href="#i-book"/></svg></div><h3>تعليم القراءة من الصفر</h3><p>للأطفال والكبار، حتى يقرؤوا المصحف قراءة صحيحة.</p></div>
+        <div class="pillar"><div class="ic"><svg><use href="#i-shield"/></svg></div><h3>ضبط المخارج والأحكام</h3><p>تطبيقًا عمليًّا لا حفظًا نظريًّا فقط.</p></div>
+        <div class="pillar"><div class="ic"><svg><use href="#i-heart"/></svg></div><h3>العمل معلمةً للقرآن</h3><p>في دور التحفيظ ورياض الأطفال، أو تعليم أبنائك بنفسك.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- =========================== المعرض =========================== -->
+<div class="page" id="gallery" data-title="المعرض | دار خادم القرآن الكريم">
+  <section>
+    <div class="wrap">
+      <div class="center">
+        <h2>من أنشطة الدار</h2>
+        <div class="ornament"><svg><use href="#i-star"/></svg></div>
+        <p class="measure" style="margin-bottom:2.5rem">لحظات من الحلقات والتكريم ولوحات الشرف الشهرية. ننشر أسماء المتفوقين وصورهم بإذن أولياء أمورهم.</p>
+      </div>
+      <div class="carousel" data-carousel aria-roledescription="ألبوم صور" aria-label="ألبوم أنشطة الدار">
+        <div class="car-track"></div>
+        <button class="car-btn car-prev" aria-label="السابق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></button>
+        <button class="car-btn car-next" aria-label="التالي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 6-6 6 6 6"/></svg></button>
+        <p class="car-cap"></p>
+        <div class="car-dots"></div>
+      </div>
+    </div>
+    </div>
+  </section>
+</div>
+
+<!-- =========================== المقالات =========================== -->
+<div class="page" id="articles" data-title="المقالات | دار خادم القرآن الكريم">
+  <section>
+    <div class="wrap">
+      <div class="center">
+        <h2>المقالات</h2>
+        <div class="ornament"><svg><use href="#i-star"/></svg></div>
+        <p class="measure" style="margin-bottom:2.5rem">مقالات تربوية لأولياء الأمور، وأخبار الدار وأنشطتها.</p>
+      </div>
+      <div class="articles" id="articleList"><p class="center empty">لا توجد مقالات بعد.</p></div>
+    </div>
+  </section>
+</div>
+
+<div class="page" id="article" data-title="مقال | دار خادم القرآن الكريم">
+  <section>
+    <div class="wrap">
+      <article class="post" id="articleView"></article>
+      <div class="actions"><a class="btn btn-ghost" href="#articles">كل المقالات</a></div>
+    </div>
+  </section>
+</div>
+
+<!-- =========================== تواصل معنا =========================== -->
+<div class="page" id="contact" data-title="تواصل معنا | دار خادم القرآن الكريم">
+  <section>
+    <div class="wrap">
+      <div class="center">
+        <h2>تواصل معنا</h2>
+        <div class="ornament"><svg><use href="#i-star"/></svg></div>
+        <p class="measure" style="margin-bottom:2.5rem">التسجيل والاستفسار عبر واتساب. أرسل اسم الطالب وعمره والبرنامج الذي يناسبه، وتتواصل معك الإدارة.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="ic"><svg><use href="#i-wa"/></svg></div>
+          <h3>التسجيل والاستفسار</h3>
+          <a href="https://wa.me/201060423890" target="_blank" rel="noopener">+20 106 042 3890</a>
+        </div>
+        <div class="contact-card">
+          <div class="ic"><svg><use href="#i-wa"/></svg></div>
+          <h3>دورة إعداد المعلمات</h3>
+          <a href="https://wa.me/201123105331" target="_blank" rel="noopener">+20 112 310 5331</a>
+        </div>
+        <div class="contact-card">
+          <div class="ic"><svg><use href="#i-pin"/></svg></div>
+          <h3>العنوان</h3>
+          <p>أخميم، شارع الأبراج، محافظة سوهاج</p>
+        </div>
+      </div>
+      <div class="center" style="margin-top:2.5rem">
+        <h3 style="margin-bottom:1rem">تابعنا</h3>
+        <ul class="social" style="justify-content:center">
+          <li><a href="https://www.facebook.com/share/1cbTjfFqDb/" target="_blank" rel="noopener" aria-label="فيسبوك"><svg><use href="#i-fb"/></svg></a></li>
+          <li><a href="https://t.me/+i7IzTL-LwtNmMTc0" target="_blank" rel="noopener" aria-label="تليجرام"><svg><use href="#i-tg"/></svg></a></li>
+          <li><a href="https://wa.me/201060423890" target="_blank" rel="noopener" aria-label="واتساب"><svg><use href="#i-wa"/></svg></a></li>
+          <!-- ضع الرابط بدل # وستظهر الأيقونة تلقائيًّا -->
+          <li><a href="#" target="_blank" rel="noopener" aria-label="يوتيوب"><svg><use href="#i-yt"/></svg></a></li>
+          <li><a href="#" target="_blank" rel="noopener" aria-label="إنستغرام"><svg><use href="#i-ig"/></svg></a></li>
+          <li><a href="#" target="_blank" rel="noopener" aria-label="إكس"><svg><use href="#i-x"/></svg></a></li>
+          <li><a href="#" target="_blank" rel="noopener" aria-label="تيك توك"><svg><use href="#i-tt"/></svg></a></li>
+        </ul>
+      </div>
+      <!-- مكان الخريطة: استبدل هذا الإطار بكود التضمين من خرائط جوجل (مشاركة ← تضمين خريطة) -->
+      <div class="ph map"><div><svg><use href="#i-pin"/></svg>خريطة موقع الدار</div></div>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="brand" href="#home"><img src="logo.webp" alt="" width="52" height="52"><span><b>دار خادم القرآن الكريم</b><small>أخميم، سوهاج</small></span></a>
+        <p style="margin-top:1rem" class="measure">تحفيظ القرآن الكريم وتعليم العلوم الشرعية. بصحبة القرآن.. نصنع أجيالًا على طاعة الله.</p>
+      </div>
+      <div>
+        <h4>روابط</h4>
+        <ul>
+          <li><a href="#about">من نحن</a></li>
+          <li><a href="#programs">البرامج</a></li>
+          <li><a href="#course">دورة المعلمات</a></li>
+          <li><a href="#gallery">المعرض</a></li>
+          <li><a href="#articles">المقالات</a></li>
+          <li><a href="#contact">تواصل معنا</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>تابعنا</h4>
+        <ul class="social">
+          <li><a href="https://www.facebook.com/share/1cbTjfFqDb/" target="_blank" rel="noopener" aria-label="فيسبوك"><svg><use href="#i-fb"/></svg></a></li>
+          <li><a href="https://t.me/+i7IzTL-LwtNmMTc0" target="_blank" rel="noopener" aria-label="تليجرام"><svg><use href="#i-tg"/></svg></a></li>
+          <li><a href="https://wa.me/201060423890" target="_blank" rel="noopener" aria-label="واتساب"><svg><use href="#i-wa"/></svg></a></li>
+          <li><a href="#" target="_blank" rel="noopener" aria-label="يوتيوب"><svg><use href="#i-yt"/></svg></a></li>
+          <li><a href="#" target="_blank" rel="noopener" aria-label="إنستغرام"><svg><use href="#i-ig"/></svg></a></li>
+          <li><a href="#" target="_blank" rel="noopener" aria-label="إكس"><svg><use href="#i-x"/></svg></a></li>
+          <li><a href="#" target="_blank" rel="noopener" aria-label="تيك توك"><svg><use href="#i-tt"/></svg></a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copy">© 2026 دار خادم القرآن الكريم. «خيركم من تعلّم القرآن وعلّمه»</p>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/201060423890" target="_blank" rel="noopener" aria-label="تواصل على واتساب"><svg><use href="#i-wa"/></svg></a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+<script>
+(function(){
+  document.documentElement.classList.add('js');
+  var pages=document.querySelectorAll('.page'), links=document.querySelectorAll('.menu a');
+  var menu=document.getElementById('menu'), toggle=document.querySelector('.menu-toggle');
+  var ARTICLES=[];
+  function esc(t){var d=document.createElement('div');d.textContent=t==null?'':String(t);return d.innerHTML;}
+  function fmt(d){try{return new Date(d).toLocaleDateString('ar-EG',{year:'numeric',month:'long',day:'numeric'});}catch(e){return d||'';}}
+  function slug(a,i){return 'a'+i;}
+
+  function show(){
+    var h=(location.hash||'#home').slice(1), id=h;
+    if(h.indexOf('article-')===0) id='article';
+    var target=document.getElementById(id);
+    if(!target||!target.classList.contains('page')){id='home';target=document.getElementById('home');}
+    pages.forEach(function(p){p.classList.toggle('active',p===target);});
+    links.forEach(function(a){ if(a.getAttribute('href')==='#'+id||(id==='article'&&a.getAttribute('href')==='#articles')) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+    document.title=target.getAttribute('data-title');
+    if(id==='article') renderArticle(h.slice(8));
+    menu.classList.remove('open');toggle.setAttribute('aria-expanded','false');
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',show);
+  toggle.addEventListener('click',function(){var o=menu.classList.toggle('open');toggle.setAttribute('aria-expanded',o?'true':'false');});
+
+  /* المقالات */
+  function renderList(){
+    var box=document.getElementById('articleList');
+    if(!ARTICLES.length){box.innerHTML='<p class="center empty">لا توجد مقالات بعد.</p>';return;}
+    box.innerHTML=ARTICLES.map(function(a,i){
+      return '<a class="card-a" href="#article-'+i+'">'+(a.image?'<img src="'+esc(a.image)+'" alt="" loading="lazy">':'')+
+        '<div class="in"><time>'+esc(fmt(a.date))+'</time><h3>'+esc(a.title)+'</h3><p>'+esc(a.summary||'')+'</p><span class="more">اقرأ المقال</span></div></a>';
+    }).join('');
+  }
+  function renderArticle(i){
+    var a=ARTICLES[+i], v=document.getElementById('articleView');
+    if(!a){v.innerHTML='<p class="empty">المقال غير موجود.</p>';return;}
+    document.title=a.title+' | دار خادم القرآن الكريم';
+    var body=window.marked?DOMPurify.sanitize(marked.parse(a.body||'')):esc(a.body||'');
+    v.innerHTML='<time>'+esc(fmt(a.date))+'</time><h1>'+esc(a.title)+'</h1>'+(a.image?'<img class="cover" src="'+esc(a.image)+'" alt="">':'')+'<div class="body">'+body+'</div>';
+  }
+
+  /* الألبوم */
+  function carousel(el,items){
+    var track=el.querySelector('.car-track'),cap=el.querySelector('.car-cap'),dots=el.querySelector('.car-dots'),i=0,timer;
+    if(!items.length){track.innerHTML='';cap.textContent='تُضاف الصور قريبًا';el.querySelectorAll('.car-btn').forEach(function(b){b.hidden=true;});return;}
+    track.innerHTML=items.map(function(it,k){return '<figure'+(k?'':' class="on"')+'><img src="'+esc(it.image)+'" alt="'+esc(it.caption||'صورة من الدار')+'" loading="'+(k?'lazy':'eager')+'"></figure>';}).join('');
+    dots.innerHTML=items.map(function(_,k){return '<button aria-label="الصورة '+(k+1)+'"'+(k?'':' aria-current="true"')+'></button>';}).join('');
+    var figs=track.querySelectorAll('figure'),ds=dots.querySelectorAll('button');
+    function go(n){figs[i].classList.remove('on');ds[i].removeAttribute('aria-current');i=(n+figs.length)%figs.length;figs[i].classList.add('on');ds[i].setAttribute('aria-current','true');cap.textContent=items[i].caption||'';}
+    cap.textContent=items[0].caption||'';
+    el.querySelector('.car-next').onclick=function(){go(i+1);restart();};
+    el.querySelector('.car-prev').onclick=function(){go(i-1);restart();};
+    ds.forEach(function(d,k){d.onclick=function(){go(k);restart();};});
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function restart(){clearInterval(timer);if(!reduce&&figs.length>1)timer=setInterval(function(){go(i+1);},4500);}
+    el.addEventListener('mouseenter',function(){clearInterval(timer);});el.addEventListener('mouseleave',restart);
+    var x0=null;track.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
+    track.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){go(dx<0?i-1:i+1);restart();}x0=null;});
+    restart();
+  }
+
+  function load(path,fallback){return fetch(path,{cache:'no-cache'}).then(function(r){return r.ok?r.json():fallback;}).catch(function(){return fallback;});}
+  var GALLERY_FALLBACK={items:[
+    {image:'honor-women-1.webp',caption:'أوائل حلقة الكبار نساء'},
+    {image:'honor-zahrat.webp',caption:'أوائل حلقة الزهرات'},
+    {image:'honor-women-2.webp',caption:'المتفوقات في حلقة الكبار نساء'}]};
+  load('gallery.json',GALLERY_FALLBACK).then(function(g){
+    var items=(g&&g.items)||[];
+    document.querySelectorAll('[data-carousel]').forEach(function(el){carousel(el,items);});
+  });
+  load('articles.json',{articles:[]}).then(function(d){
+    ARTICLES=((d&&d.articles)||[]).slice().sort(function(a,b){return new Date(b.date)-new Date(a.date);});
+    renderList(); if((location.hash||'').indexOf('#article-')===0) show();
+  });
+  show();
+})();
+</script>
+</body>
+</html>
