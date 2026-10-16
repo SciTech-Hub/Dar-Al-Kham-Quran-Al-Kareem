@@ -1,0 +1,35 @@
+media:
+  input: images/uploads
+  output: images/uploads
+
+content:
+  - name: gallery
+    label: الألبوم
+    type: file
+    path: gallery.json
+    format: json
+    fields:
+      - name: items
+        label: الصور
+        type: object
+        list: true
+        fields:
+          - { name: image, label: الصورة, type: image }
+          - { name: caption, label: التعليق تحت الصورة, type: string }
+
+  - name: articles
+    label: المقالات
+    type: file
+    path: articles.json
+    format: json
+    fields:
+      - name: articles
+        label: المقالات
+        type: object
+        list: true
+        fields:
+          - { name: title, label: العنوان, type: string }
+          - { name: date, label: التاريخ, type: date }
+          - { name: image, label: صورة الغلاف, type: image }
+          - { name: summary, label: ملخص قصير يظهر في القائمة, type: text }
+          - { name: body, label: نص المقال, type: rich-text }
